@@ -1,5 +1,8 @@
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import L from "leaflet";
+import "leaflet-defaulticon-compatibility";
 import useUserStore from "./store";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
@@ -72,7 +75,7 @@ export default function Map() {
               </Marker>
             )
         )}
-        <Toaster/>
+        <Toaster />
     </MapContainer>
   );
 }
