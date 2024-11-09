@@ -8,8 +8,8 @@ const axiosInstance = axios.create({
 axiosInstance.defaults.withCredentials = true;
 export { axiosInstance };
 export const backendUrl = backendServer;
-export const signinApi = `${backendServer}/auth/signin`;
-export const signupApi = `${backendServer}/auth/signup`;
+export const signinApi = `${backendServer}/signin`;
+export const signupApi = `${backendServer}/signup`;
 export const searchApi = `${backendServer}/search`;
 export const fecthApi = `${backendServer}/fetch`;
 export const deleteApi = `${backendServer}/delete`;
