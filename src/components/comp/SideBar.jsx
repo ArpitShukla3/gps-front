@@ -32,6 +32,7 @@ export default function SideBar() {
       setTo(null);
       setFrom(null);
       setActive(null);
+      localStorage.removeItem("authToken");
       toast.dismiss();
       navigate("/auth");
     }
