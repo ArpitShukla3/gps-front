@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addApi } from "../../../apiList";
+import { addApi, axiosInstance } from "../../../apiList";
 import useUserStore from "../../store";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -16,7 +16,7 @@ export default function Avatar({ name, email,result}) {
         }
         toast.loading("Adding to your list");
         try{
-            const res = await axios.post(addApi,{toId:result._id},{withCredentials:true});
+            const res = await axiosInstance.post(addApi,{toId:result._id});
             toast.dismiss();
             toast.success("Added to your list");
         }

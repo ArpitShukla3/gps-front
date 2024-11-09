@@ -4,7 +4,7 @@ import { cn } from "../utils/cn";
 import { Input } from "../components/ui/Input";
 import { useState } from "react";
 import axios from "axios";
-import { signupApi } from "../../apiList";
+import { axiosInstance, signupApi } from "../../apiList";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 export function Signup({ setSignin }) {
@@ -34,7 +34,9 @@ export function Signup({ setSignin }) {
     
     try {
       toast.loading("Posting data");
-      const res = await axios.post(signupApi, { name: fullName, email: email, password: password }, { withCredentials: true });
+      const res = await axiosInstance.post(signupApi, { name: fullName, email: email, password: password },);
+      localStorage.setItem("authToken", res.data.user.authToken);
+      console.log(res.data.user);
       toast.dismiss();
       // toast.success(res.data.mssg);
       navigateTo("/dashboard")

@@ -23,7 +23,9 @@ export function Signin({ setSignin }) {
     if (!validateForm()) return;
 
     try {
-    const data =  await axios.post(signinApi, { email, password },{withCredentials:true});
+    const data =  await axiosInstance.post(signinApi, { email, password });
+    localStorage.setItem("authToken", data.data.user.authToken);
+    // console.log(data.data.user);
       toast.success("Signined In Successfully");
       navigateTo("/dashboard"); 
     } catch (error) {

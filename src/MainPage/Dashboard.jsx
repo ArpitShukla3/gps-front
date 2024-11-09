@@ -4,7 +4,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import SideBar from "../components/comp/SideBar";
 import Map from "../Map";
-import { backendServer, fecthApi } from "../../apiList";
+import { axiosInstance, backendServer, fecthApi } from "../../apiList";
 import useUserStore from "../store";
 import { io } from "socket.io-client";
 export default function Dashboard() {
@@ -16,7 +16,7 @@ export default function Dashboard() {
   const user = useUserStore((state) => state.user);
   async function downloadData() {
     try {
-      const data = await axios.get(fecthApi, { withCredentials: true });
+      const data = await axiosInstance.get(fecthApi);
       setUser(data.data); // Set user data in Zustand store
       setTo(data.data.To); // Set To data in Zustand store
       setFrom(data.data.From); // Set From data in Zustand store

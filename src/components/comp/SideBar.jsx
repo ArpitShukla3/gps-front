@@ -1,7 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { useState } from "react";
-import { logoutApi, searchApi } from "../../../apiList";
+import { axiosInstance, logoutApi, searchApi } from "../../../apiList";
 import Avatar from "./Avatar";
 import useUserStore from "../../store";
 import LiveAvatar from "./LiveAvatar";
@@ -27,7 +27,7 @@ export default function SideBar() {
   const logout = async () => {
     try {
       toast.loading("Logging out...");
-      await axios.get(logoutApi, {}, { withCredentials: true });
+      await axiosInstance.get(logoutApi, {});
       setUser(null);
       setTo(null);
       setFrom(null);
@@ -50,7 +50,7 @@ export default function SideBar() {
   };
 
   const searchApiCall = async (query) => {
-    const res = await axios.get(searchApi, {
+    const res = await axiosInstance.get(searchApi, {
       params: { search: query },
       withCredentials: true,
     });
