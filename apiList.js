@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // export const backendServer =`http://localhost:3000`;
+// export const backendServer =`http://192.168.137.140:3000`;
 export const backendServer = `https://gps-nfk0.onrender.com`;
 const axiosInstance = axios.create({
   withCredentials: true,
