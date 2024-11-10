@@ -15,6 +15,9 @@ export default function Dashboard() {
   const From = useUserStore((state) => state.From);
   const socket = io(backendServer, { withCredentials: true });
   const user = useUserStore((state) => state.user);
+  const toggler = useUserStore((state) => state.toggler);
+  const setToggler = useUserStore((state) => state.setToggler);
+  // const [toggler,setToggler] = useState(false);
   const navigateTo = useNavigate();
   async function downloadData() {
     try {
@@ -83,16 +86,45 @@ export default function Dashboard() {
       });
     }
   }, [dataLoaded]);
-
+  function isSmallDevice() {
+    return window.innerWidth <= 768; // You can adjust the width threshold as needed
+  }
   return (
     <div>
-      <Toaster />
-      <div className="w-screen h-screen flex flex-row ">
-        <div className="w-1/3">
-          <SideBar />
+      <div className="w-screen h-screen flex flex-row relative">
+        {toggler && isSmallDevice() && (
+          <div className="md:w-1/3 w-full z-10">
+            <SideBar />
+          </div>
+        )}
+        {!isSmallDevice() && (
+          <div className="md:w-1/3 w-full z-10">
+            <SideBar />
+          </div>
+        )}
+        {!toggler && (
+          <span className="z-20 absolute top-0 left-0 bg-white m-4 md:hidden" onClick={() => setToggler(true)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-10 w-10"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </span>
+        )}
+        <div className="w-full h-full z-0 ">
+          <Map />
         </div>
-        <Map />
       </div>
+      <Toaster />
     </div>
   );
 }

@@ -16,6 +16,8 @@ export default function SideBar() {
   const setActive = useUserStore((state) => state.setActive);
   const setUser = useUserStore((state) => state.setUser);
   const user = useUserStore((state) => state.user);
+  const toggle = useUserStore((state)=>state.toggler);
+  const setToggler = useUserStore((state)=>state.setToggler);
   const navigate = useNavigate();
   const debounce = (func, delay) => {
     let debounceTimer;
@@ -65,6 +67,9 @@ export default function SideBar() {
       <div className="flex flex-col p-4 border-b border-gray-300 px-10">
         <h2 className="text-xl font-semibold">{user && user.name ? user.name : "Loading"}</h2>
         <p className="text-gray-600">{user && user.email ? user.email : "Loading"}</p>
+        <div className="md:hidden" onClick={()=>setToggler(false)}>
+          Click to close
+        </div>
       </div>
       <div className="flex flex-col p-4 pt-4 flex-grow">
         <div className="flex flex-row items-center gap-2 mb-4 border border-gray-400 rounded-md px-2">

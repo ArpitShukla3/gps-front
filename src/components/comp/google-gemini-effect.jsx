@@ -32,13 +32,13 @@ export const GoogleGeminiEffect = ({
         {description ||
           `Scroll this component and see the bottom SVG come to life wow this
         works!`}
-        <div className="flex justify-center sm:hidden pt-8">
+        {/* <div className="flex justify-center sm:hidden pt-8">
           <button className="px-4 py-1 rounded-full bg-white text-black tracking-widest uppercase text-sm transform hover:scale-105 hover:bg-red-700 active:bg-blue-700 transition duration-200"
           onClick={()=>handleGetStarted()}
           >
             Get Started
           </button>
-        </div>
+        </div> */}
       </p>
       <svg
         width="1440"

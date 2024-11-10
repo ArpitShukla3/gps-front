@@ -12,6 +12,8 @@ const useUserStore = create((set) => ({
   setFrom: (data) => set({ From: data }),
   active: null,
   setActive: (data) => set({ active: data }),
+  toggler:false,
+  setToggler: (data) => set({ toggler: data }),
 }));
 
 // Subscribe to changes and log the state

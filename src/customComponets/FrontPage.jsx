@@ -29,7 +29,7 @@ export default function FrontPage() {
         className="h-[400vh] bg-black w-full dark:border dark:border-white/[0.1] rounded-md relative pt-40 overflow-clip "
         ref={ref}
       >
-        <div className="fixed top-4 right-4 hidden md:block">
+        <div className="fixed top-4 right-4">
             <button className="px-12 py-4 rounded-full bg-white font-bold text-black tracking-widest uppercase transform hover:scale-105 hover:bg-gray-500 active:bg-blue-700 transition-colors duration-200" onClick={handleGetStarted}>
               Get Started {"->"}
             </button>
