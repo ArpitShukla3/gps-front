@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
+import { useNavigate } from "react-router-dom";
 const transition = {
   duration: 0,
   ease: "linear",
@@ -12,6 +13,16 @@ export const GoogleGeminiEffect = ({
   description,
   className,
 }) => {
+  const navigateTo = useNavigate();
+  const handleGetStarted = () => {
+    console.log("Get Started");
+    const loginToken = localStorage.getItem("authToken");
+    if (loginToken) {
+      navigateTo("/dashboard");
+    } else {
+      navigateTo("/auth");
+    }
+  }
   return (
     <div className={cn("sticky top-80", className)}>
       <p className="text-lg md:text-7xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
@@ -22,7 +33,9 @@ export const GoogleGeminiEffect = ({
           `Scroll this component and see the bottom SVG come to life wow this
         works!`}
         <div className="flex justify-center sm:hidden pt-8">
-          <button className="px-4 py-1 rounded-full bg-white text-black tracking-widest uppercase text-sm transform hover:scale-105 hover:bg-red-700 active:bg-blue-700 transition duration-200">
+          <button className="px-4 py-1 rounded-full bg-white text-black tracking-widest uppercase text-sm transform hover:scale-105 hover:bg-red-700 active:bg-blue-700 transition duration-200"
+          onClick={()=>handleGetStarted()}
+          >
             Get Started
           </button>
         </div>

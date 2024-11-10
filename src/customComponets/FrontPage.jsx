@@ -16,7 +16,7 @@ export default function FrontPage() {
   const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
   const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
   const handleGetStarted = () => {
-    const loginToken = document.cookie;
+    const loginToken = localStorage.getItem("authToken");
     if (loginToken) {
       navigateTo("/dashboard");
     } else {

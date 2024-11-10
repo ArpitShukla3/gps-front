@@ -1,5 +1,4 @@
 import SearchIcon from "@mui/icons-material/Search";
-import axios from "axios";
 import { useState } from "react";
 import { axiosInstance, logoutApi, searchApi } from "../../../apiList";
 import Avatar from "./Avatar";
@@ -16,6 +15,7 @@ export default function SideBar() {
   const setFrom = useUserStore((state) => state.setFrom);
   const setActive = useUserStore((state) => state.setActive);
   const setUser = useUserStore((state) => state.setUser);
+  const user = useUserStore((state) => state.user);
   const navigate = useNavigate();
   const debounce = (func, delay) => {
     let debounceTimer;
@@ -61,9 +61,12 @@ export default function SideBar() {
 
   const debouncedSearch = debounce(searchApiCall, 300);
   return (
-    <div className="w-full h-full flex flex-col justify-between bg-white h-screen py-10">
-      <div className="flex flex-col p-4 pt-4">
-      
+    <div className="w-full h-full flex flex-col justify-between bg-white h-screen pb-10">
+      <div className="flex flex-col items-center p-4 border-b border-gray-300">
+        <h2 className="text-xl font-semibold">{user && user.name? user.name :"Loading"}</h2>
+        <p className="text-gray-600">{user && user.email? user.email : "Loading"}</p>
+      </div>
+      <div className="flex flex-col p-4 pt-4 flex-grow">
         <div className="flex flex-row items-center gap-2 mb-4 border border-gray-400 rounded-md px-2">
           <SearchIcon />
           <input
@@ -93,9 +96,9 @@ export default function SideBar() {
               />
             ))}
       </div>
-      <div>
+      <div className="mt-auto">
         <button
-          className=" w-[96%] px-4 py-4 rounded-full bg-orange-800 font-bold text-white tracking-widest uppercase transform hover:scale-105 hover:bg-[#f43b3b] transition-colors duration-200"
+          className="w-[96%] px-4 py-4 rounded-full bg-orange-800 font-bold text-white tracking-widest uppercase transform hover:scale-105 hover:bg-[#f43b3b] transition-colors duration-200"
           onClick={logout}
         >
           Logout

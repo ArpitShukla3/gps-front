@@ -39,6 +39,7 @@ export default function Dashboard() {
   function updateFrom(data){
     console.log("Location update:", data);
     const newFrom = From.filter((doc) => doc._id !== data._id);
+    data.updatedAt = new Date().toISOString();
     setFrom([data,...newFrom]);
   }
   useEffect(() => {

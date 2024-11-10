@@ -17,11 +17,14 @@ export default function LiveAvatar({ name, email, result }) {
           alt="avatar"
           className="w-10 h-10 rounded-full"
         />
-        <div>
+        <div className="flex-1">
           <h1 className="font-bold text-lg group-hover:text-white">{name}</h1>
-          <p className="text-sm text-gray-500 group-hover:text-gray-300">
+          <p className="text-sm text-gray-500 group-hover:text-white">
             {email}
           </p>
+        </div>
+        <div className="text-xs text-gray-400 italic font-thin self-end hover:text-white">
+          {result && result.updatedAt ? `Updated at ${new Date(result.updatedAt).toLocaleString()}` : "User is offline"}
         </div>
       </div>
       <Toaster />
