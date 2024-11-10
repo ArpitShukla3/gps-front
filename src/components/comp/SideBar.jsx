@@ -62,9 +62,9 @@ export default function SideBar() {
   const debouncedSearch = debounce(searchApiCall, 300);
   return (
     <div className="w-full h-full flex flex-col justify-between bg-white h-screen pb-10">
-      <div className="flex flex-col items-center p-4 border-b border-gray-300">
-        <h2 className="text-xl font-semibold">{user && user.name? user.name :"Loading"}</h2>
-        <p className="text-gray-600">{user && user.email? user.email : "Loading"}</p>
+      <div className="flex flex-col p-4 border-b border-gray-300 px-10">
+        <h2 className="text-xl font-semibold">{user && user.name ? user.name : "Loading"}</h2>
+        <p className="text-gray-600">{user && user.email ? user.email : "Loading"}</p>
       </div>
       <div className="flex flex-col p-4 pt-4 flex-grow">
         <div className="flex flex-row items-center gap-2 mb-4 border border-gray-400 rounded-md px-2">
@@ -73,7 +73,7 @@ export default function SideBar() {
             type="text"
             value={search}
             onChange={handleSearch}
-            placeholder="Search..."
+            placeholder="Share location to selected ones"
             className="p-2 rounded border-none focus:outline-none" // Added focus:outline-none to remove the black border when active
           />
         </div>
@@ -96,9 +96,9 @@ export default function SideBar() {
               />
             ))}
       </div>
-      <div className="mt-auto">
+      <div className="w-full flex justify-center items-center">
         <button
-          className="w-[96%] px-4 py-4 rounded-full bg-orange-800 font-bold text-white tracking-widest uppercase transform hover:scale-105 hover:bg-[#f43b3b] transition-colors duration-200"
+          className="w-[86%] px-4 py-4 rounded-full bg-orange-800 font-bold text-white tracking-widest uppercase transform hover:scale-105 hover:bg-[#b51212] transition-colors duration-200"
           onClick={logout}
         >
           Logout

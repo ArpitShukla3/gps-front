@@ -7,6 +7,7 @@ import Map from "../Map";
 import { axiosInstance, backendServer, fecthApi } from "../../apiList";
 import useUserStore from "../store";
 import { io } from "socket.io-client";
+import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const setUser = useUserStore((state) => state.setUser);
   const setTo = useUserStore((state) => state.setTo);
@@ -14,6 +15,7 @@ export default function Dashboard() {
   const From = useUserStore((state) => state.From);
   const socket = io(backendServer, { withCredentials: true });
   const user = useUserStore((state) => state.user);
+  const navigateTo = useNavigate();
   async function downloadData() {
     try {
       const data = await axiosInstance.get(fecthApi);
@@ -28,7 +30,13 @@ export default function Dashboard() {
   }
 
   const [dataLoaded, setDataLoaded] = useState(false);
-
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      toast.error("Please login to continue");
+      navigateTo("/auth");
+    }
+  }, []);
   useEffect(() => {
     async function fetchData() {
       await downloadData();
