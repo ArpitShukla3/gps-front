@@ -56,11 +56,11 @@ export default function Map() {
       />
 
       {/* Marker for the user's current location */}
-      <Marker position={center}>
+      {/* <Marker position={center} key={"ransom"}>
         <Popup>
           <strong>You are here</strong>
         </Popup>
-      </Marker>
+      </Marker> */}
 
       {/* Markers for locations in `From` array */}
       {From &&
