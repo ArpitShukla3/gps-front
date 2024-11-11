@@ -6,9 +6,9 @@ const useUserStore = create((set) => ({
   // Define your state here
   user: null,
   setUser: (userData) => set({ user: userData }),
-  To: null,
+  To: [],
   setTo: (data) => set({ To: data }),
-  From: null,
+  From: [],
   setFrom: (data) => set({ From: data }),
   active: null,
   setActive: (data) => set({ active: data }),

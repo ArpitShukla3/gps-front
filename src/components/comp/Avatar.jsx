@@ -3,7 +3,7 @@ import { addApi, axiosInstance } from "../../../apiList";
 import useUserStore from "../../store";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Avatar({ name, email,result}) {
+export default function Avatar({ name, email,result,onClick}) {
     const To = useUserStore((state) => state.To);
     const setTo = useUserStore((state) => state.setTo);
     const handleClick = async() => {
@@ -24,6 +24,7 @@ export default function Avatar({ name, email,result}) {
             toast.dismiss();
             toast.error("Failed to add to your list");
         }
+        onClick();;
      }
     return (
         <div className="w-full px-2 py-1 my-1 hover:bg-green-600 rounded-md hover:text-white transition-colors duration-300" onClick={handleClick}>

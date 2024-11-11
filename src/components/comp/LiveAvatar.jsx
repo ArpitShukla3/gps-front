@@ -1,7 +1,7 @@
 import useUserStore from "../../store";
 import { Toaster } from "react-hot-toast";
 
-export default function LiveAvatar({ name, email, result }) {
+export default function LiveAvatar({ name, email, result,sending }) {
   const setActive = useUserStore((state) => state.setActive);
   const handleClick = () => {
     setActive(result);
@@ -23,9 +23,9 @@ export default function LiveAvatar({ name, email, result }) {
             {email}
           </p>
         </div>
-        <div className="text-xs text-gray-400 italic font-thin self-end group-hover:text-white">
+       { !sending && <div className="text-xs text-gray-400 italic font-thin self-end group-hover:text-white">
           {result && result.updatedAt ? `Updated at ${new Date(result.updatedAt).toLocaleString()}` : "User is offline"}
-        </div>
+        </div>}
       </div>
       <Toaster />
     </div>

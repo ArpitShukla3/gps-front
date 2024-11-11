@@ -10,7 +10,9 @@ import { useNavigate } from "react-router-dom";
 export default function SideBar() {
   const [search, SetSearch] = useState("");
   const [searchResults, SetSearchResults] = useState([]);
+  const [showReceiver, setShowReceiver] = useState(true);
   const From = useUserStore((state) => state.From);
+  const To = useUserStore((state) => state.To);
   const setTo = useUserStore((state) => state.setTo);
   const setFrom = useUserStore((state) => state.setFrom);
   const setActive = useUserStore((state) => state.setActive);
@@ -63,7 +65,7 @@ export default function SideBar() {
 
   const debouncedSearch = debounce(searchApiCall, 300);
   return (
-    <div className="w-full h-full flex flex-col justify-between bg-white h-screen pb-10">
+    <div className="w-full h-full flex flex-col justify-between  h-screen pb-10">
       <div className="flex flex-col p-4 border-b border-gray-300 px-10">
         <h2 className="text-xl font-semibold">{user && user.name ? user.name : "Loading"}</h2>
         <p className="text-gray-600">{user && user.email ? user.email : "Loading"}</p>
@@ -71,7 +73,7 @@ export default function SideBar() {
           Click to close
         </div>
       </div>
-      <div className="flex flex-col p-4 pt-4 flex-grow">
+      <div className="flex flex-col p-4 pt-4 h-[80%] border ">
         <div className="flex flex-row items-center gap-2 mb-4 border border-gray-400 rounded-md px-2">
           <SearchIcon />
           <input
@@ -79,27 +81,60 @@ export default function SideBar() {
             value={search}
             onChange={handleSearch}
             placeholder="Share location to selected ones"
-            className="p-2 rounded border-none focus:outline-none" // Added focus:outline-none to remove the black border when active
+            className="p-2 rounded border-none focus:outline-none"
           />
         </div>
-        {search
+        <div onClick={()=>setShowReceiver(!showReceiver)} >
+        {showReceiver ? (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                <polyline points="7 11 12 16 17 11" />
+                <line x1="12" y1="4" x2="12" y2="16" />
+              </svg>
+            </>
+          ) : (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                <polyline points="7 9 12 4 17 9" />
+                <line x1="12" y1="4" x2="12" y2="16" />
+              </svg>
+            </>
+          )}
+        </div>
+       <div className="overflow-scroll  overflow-x-hidden max-h-3/4 border-2 border-gray-500 rounded-md ">
+       {search
           ? searchResults.map((result) => (
               <Avatar
                 key={result._id}
                 name={result.name}
                 email={result.email}
                 result={result}
+                onClick={() => {SetSearch(""); SetSearchResults([]);}}
               />
             ))
-          : From &&
-            From.map((result) => (
+          : (showReceiver)?  From.map((result) => (
               <LiveAvatar
                 key={result._id}
                 name={result.name}
                 email={result.email}
                 result={result}
+                sending = {false}
               />
-            ))}
+            )): To.map((result) => (
+              <LiveAvatar
+                key={result._id}
+                name={result.name}
+                email={result.email}
+                result={result}
+                sending = {true}
+              />
+            )) 
+            }
+       </div>
       </div>
       <div className="w-full flex justify-center items-center">
         <button
