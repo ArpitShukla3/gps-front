@@ -31,7 +31,7 @@ export default function SideBar() {
   const logout = async () => {
     try {
       toast.loading("Logging out...");
-      await axiosInstance.get(logoutApi, {});
+      // await axiosInstance.get(logoutApi, {});
       setUser(null);
       setTo(null);
       setFrom(null);
