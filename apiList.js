@@ -22,4 +22,6 @@ export const searchApi = `${backendServer}/search`;
 export const fecthApi = `${backendServer}/fetch`;
 export const deleteApi = `${backendServer}/delete`;
 export const addApi = `${backendServer}/add`;
-export const logoutApi = `${backendServer}/auth/logout`;
+export const logoutApi = `${backendServer}/logout`;
+export const signinApiGoogle = `${backendServer}/auth/google`;
+export const GoogleSignApi = `${backendServer}/google/callback`;

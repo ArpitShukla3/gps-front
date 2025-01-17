@@ -4,9 +4,10 @@ import { cn } from "../utils/cn";
 import { Input } from "../components/ui/Input";
 import { useState } from "react";
 import axios from "axios";
-import { axiosInstance, signupApi } from "../../apiList";
+import { axiosInstance, signinApiGoogle, signupApi } from "../../apiList";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+
 export function Signup({ setSignin }) {
   const navigateTo = useNavigate();
   const [name, setName] = useState("");
@@ -48,6 +49,11 @@ export function Signup({ setSignin }) {
     // setLoading(true);
   };
 
+  const handleGoogleSignup = () => {
+    toast.loading("Redirecting to Google...");
+    window.location.href = `${signinApiGoogle}`;
+  };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0C0F15] text-neutral-200">
       <h2 className="font-bold text-xl text-neutral-200">Welcome to Loci</h2>
@@ -76,6 +82,11 @@ export function Signup({ setSignin }) {
           <Input id="confirmPassword" placeholder="••••••••" type="password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} />
         </LabelInputContainer>
 
+        <button className="bg-zinc-900 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] flex items-center justify-center space-x-2" onClick={handleGoogleSignup}>
+          <span>Sign up with Google</span>
+          <BottomGradient />
+        </button>
+        <div className="my-4" />
         <button className="bg-zinc-900 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]" onClick={handleSubmit}>
           Sign up &rarr;
           <BottomGradient />
